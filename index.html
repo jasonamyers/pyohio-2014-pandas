@@ -1,213 +1,523 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+<meta charset="utf-8">
 
-		<title>Introduction to Pandas</title>
+<title>Introduction to Pandas</title>
 
-		<meta name="description" content="A simple Introduction to the Pandas Python library">
-		<meta name="author" content="Jason A Myers">
+<meta name="description" content="A simple Introduction to the Pandas Python library">
+<meta name="author" content="Jason A Myers">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+<link rel="stylesheet" href="css/reveal.min.css">
+<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+if( window.location.search.match( /print-pdf/gi ) ) {
+  var link = document.createElement( 'link' );
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = 'css/print/pdf.css';
+  document.getElementsByTagName( 'head' )[0].appendChild( link );
+}
+</script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+<!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
 
-	<body>
+<body>
 
-		<div class="reveal">
+<div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1>Pandas</h1>
-					<h3>A powerful data manipulation tool</h3>
-					<p>
-						<small><a href="http://www.jasonamyers.com">Jason A Myers</a> / <a href="http://twitter.com/jasonamyers">@jasonamyers</a> / Emma</small>
-					</p>
-				</section>
+  <!-- Any section element inside of this container is displayed as a slide -->
+  <div class="slides">
+    <section>
+      <h1>Pandas</h1>
+      <h3>A powerful data manipulation tool</h3>
+      <p>
+      <small><a href="http://www.jasonamyers.com">Jason A Myers</a> / <a href="http://twitter.com/jasonamyers">@jasonamyers</a> / Emma</small>
+      </p>
+    </section>
 
-        <section id="fragments">
-          <h2>What's so special about Pandas?</h2>
-          <ol>
-            <li class="fragment">Tabular/Matrix</li>
-            <li class="fragment">Data Flexibility</li>
-            <li class="fragment">Data Manipulation</li>
-            <li class="fragment">Time Series</li>
-          </ol>
-          <aside class="notes">
-            Think like Spreadsheet, SPSS or sql or row/column label matrixes.
-            It deals with missing data, ordered/unorders, mixed types whatever.
-            You can add remove elements at will, auto align to labels, slice, merge, pivot.
-            Simple imports and exports
-            Date windowing, rollups, shifting, lagging
-          </aside>
-        </section>
+    <section id="fragments">
+      <h2>What's so special about Pandas?</h2>
+      <ol>
+        <li class="fragment">Tabular/Matrix</li>
+        <li class="fragment">Data Flexibility</li>
+        <li class="fragment">Data Manipulation</li>
+        <li class="fragment">Time Series</li>
+      </ol>
+      <aside class="notes">
+        Think like Spreadsheet, SPSS or sql or row/column label matrixes.
+        It deals with missing data, ordered/unorders, mixed types whatever.
+        You can add remove elements at will, auto align to labels, slice, merge, pivot.
+        Simple imports and exports
+        Date windowing, rollups, shifting, lagging
+      </aside>
+    </section>
 
-				<section>
-					<h1>Installation</h1>
-					<pre><code data-trim contenteditable>
+    <section>
+      <h1>Installation</h1>
+      <pre><code data-trim contenteditable>
 pip install pandas
 
 pip install pandas as pd
-          </code></pre>
-          <aside class="notes">
-            You can install pandas fairly simply with pip; however, there is a convention of aliasing it as pd in documentation and scientific code.
-          </aside>
-				</section>
+      </code></pre>
+      <aside class="notes">
+        You can install pandas fairly simply with pip; however, there is a convention of aliasing it as pd in documentation and scientific code.
+      </aside>
+    </section>
+    <section>
+      <h2>Pandas Data Structures</h2>
+      <p>
+      <ul>
+        <li>Series - basically an ordered dict that can be named</li>
+        <li>Dataframe - A labeled two dimensional datatype</li>
+      </ul>
+      </p>
+      <aside class="notes">
+        A Series is a single vector of data (like a NumPy array) with an index that labels each element in the vector. (ordered dict)
+        A DataFrame is a tabular data structure, encapsulating multiple series like columns in a spreadsheet. Magic
+      </aside>
+    </section>
+    <section>
+      <section>
+        <h2>Series</h2>
+        <p><pre><code data-trim>import pandas as pd
 
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
+cookies = pd.Series(
+    [
+        'Chocolate Chip,'
+        'Peanut Butter,'
+        'Ginger Molasses,'
+        'Oatmeal Raisin,'
+        'Sugar',
+        'Oreo',
+    ]
+)</code></pre>
+        </p>
+      </section>
+      <section>
+        <h2>What does it look like?</h2>
+        <p><pre><code>0     Chocolate Chip
+1      Peanut Butter
+2    Ginger Molasses
+3     Oatmeal Raisin
+4              Sugar
+5               Oreo
+dtype: object</code></pre></p>
+      </section>
+      <section>
+        <h2>Properties</h2>
+        <p>
+        <pre><code>>>> cookies.values
 
-				<section>
-					<section data-background="#007777">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#007777"</code> on a slide to change the full page background to the given color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Repeated Image Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-				</section>
+    array(['Chocolate Chip', 'Peanut Butter', 'Ginger Molasses',
+            'Oatmeal Raisin', 'Sugar', 'Oreo'], dtype=object)
 
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
+>>> cookies.index
 
-    var nodes = document.querySelectorAll( selector );
+    Int64Index([0, 1, 2, 3, 4, 5], dtype='int64')</code></pre>
+        </p>
+      </section>
+      <section>
+        <h2>Specifying the Index</h2>
+        <p>
+        <pre><code>cookies = pd.Series([12, 10, 8, 6, 4, 2], index=['Chocolate Chip',
+    'Peanut Butter',
+    'Ginger Molasses',
+    'Oatmeal Raisin',
+    'Sugar',
+    'Powder Sugar'
+]) </code></pre>
+        </p>
+      </section>
+      <section>
+        <h2>Indexed Series</h2>
+        <p>
+        <pre><code>Chocolate Chip     12
+Peanut Butter      10
+Ginger Molasses     8
+Oatmeal Raisin      6
+Sugar               4
+Powder Sugar        2
+dtype: int64</code></pre>
+        </p>
+      </section>
+      <section>
+        <h2>Naming the values and indexes</h2>
+        <p>
+        <pre><code>>>> cookies.name = 'counts'
+>>> cookies.index.name = 'type'
 
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
+    type
+    Chocolate Chip     12
+    Peanut Butter      10
+    Ginger Molasses     8
+    Oatmeal Raisin      6
+    Sugar               4
+    Powder Sugar        2
+    Name: counts, dtype: int64</code></pre>
+        </p>
+      </section>
+      <section>
+        <h2>Accessing Elements</h2>
+        <p>
+        <pre><code>>>> cookies[[name.endswith('Sugar') for name in cookies.index]]
 
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
+    Sugar               4
+    Powder Sugar        2
+    dtype: int64
 
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's a few styles of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-green">highlight-green</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-current-blue">highlight-current-blue</p>
-					</section>
-				</section>
+>>> cookies[cookies > 10]
 
-				<section>
-					<h1>Questions</h1>
-					<h3>Jason A Myers / @jasonamyers</h3>
-				</section>
+    Chocolate Chip     12
+    Name: counts, dtype: int64</code></pre>
+        </p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>DataFrames</h2>
+        <p><pre><code data-trim>df = pd.DataFrame({
+    'count': [12, 10, 8, 6, 2, 2, 2],
+    'type': ['Chocolate Chip', 'Peanut Butter', 'Ginger Molasses', 'Oatmeal Raisin', 'Sugar', 'Powder Sugar', 'Sugar'],
+    'owner': ['Jason', 'Jason', 'Jason', 'Jason', 'Jason', 'Jason', 'Marvin']
+})</code></pre>
+        </p>
+      </section>
+      <section>
+        <p><pre><code>   count   owner             type
+0     12   Jason   Chocolate Chip
+1     10   Jason    Peanut Butter
+2      8   Jason  Ginger Molasses
+3      6   Jason   Oatmeal Raisin
+4      2   Jason            Sugar
+5      2   Jason     Powder Sugar
+6      2  Marvin            Sugar</code></pre>
+        </p>
+      </section>
+      <section>
+        <h2>Accessing Columns</h2>
+        <p><pre><code>>>> df['type']
 
-			</div>
+0     Chocolate Chip
+1      Peanut Butter
+2    Ginger Molasses
+3     Oatmeal Raisin
+4              Sugar
+5       Powder Sugar
+6              Sugar
+Name: type, dtype: object</code></pre>
+        </p>
+      </section>
+      <section>
+        <h2>Accessing Rows</h2>
+        <p><pre><code>>>> df.loc[2]
 
-		</div>
+    count                  8
+    owner              Jason
+    type     Ginger Molasses
+    Name: 2, dtype: object</code></pre>
+        </p>
+      </section>
+      <section>
+        <h2>Slicing Rows</h2>
+        <p><pre><code>>>> df.loc[2:5]
+        count  owner             type
+    2      8  Jason  Ginger Molasses
+    3      6  Jason   Oatmeal Raisin
+    4      2  Jason            Sugar
+    5      2  Jason     Powder Sugar</code></pre>
+        </p>
+      </section>
+      <section>
+        <h2>Pivoting</h2>
+        <p><pre><code>>>> df.loc[3:4].T
+                        3      4
+    count               6      2
+    owner           Jason  Jason
+    type   Oatmeal Raisin  Sugar</code></pre>
+        </p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Grouping</h2>
+        <p><pre><code>>>> df.groupby('owner').sum()
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+    count
+    owner
+    Jason      40
+    Marvin      2</code></pre></p>
+      </section>
+      <section>
+        <p><pre><code>>>> df.groupby(['type','owner']).sum()
 
-		<script>
+                            count
+    type            owner
+    Chocolate Chip  Jason      12
+    Ginger Molasses Jason       8
+    Oatmeal Raisin  Jason       6
+    Peanut Butter   Jason      10
+    Powder Sugar    Jason       2
+    Sugar           Jason       2
+                    Marvin      2</code></pre></p>
+      </section>
+      <section>
+        <h2>Renaming columns</h2>
+        <p><pre><code>>>> g_sum = df.groupby(['type']).sum()
+>>> g_sum.columns = ['Total']
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+                     Total
+    sum
+    Chocolate Chip      12
+    Ginger Molasses      8
+    Oatmeal Raisin       6
+    Peanut Butter       10
+    Powder Sugar         2
+    Sugar                4</code></pre></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Pivot Tables</h2>
+        <p><pre><code>>>> pd.pivot_table(df, values='count', index=['type'], columns=['owner'])
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+      Owner            Jason  Marvin
+      type
+      Chocolate Chip      12     NaN
+      Ginger Molasses      8     NaN
+      Oatmeal Raisin       6     NaN
+      Peanut Butter       10     NaN
+      Powder Sugar         2     NaN
+      Sugar                2       2</code></pre></p>
+      </section>
+      <section>
+        <h2>Joining</h2>
+        <p><pre><code>>>> df = pivot_t.join(g_sum)
+>>> df.fillna(0, inplace=True)
 
-				// Parallax scrolling
-				parallaxBackgroundImage: 'bg.jpg',
-				parallaxBackgroundSize: '4272px 2336px',
+                     Jason  Marvin  Total
+    type
+    Chocolate Chip      12       0     12
+    Ginger Molasses      8       0      8
+    Oatmeal Raisin       6       0      6
+    Peanut Butter       10       0     10
+    Powder Sugar         2       0      2
+    Sugar                2       2      4</code></pre></p>
+      </section>
+    </section>
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+    <section>
+      <section>
+        <h2>Real World Problem</h2>
+        <p></p>
+      </section>
+      <section>
+        <h2>Our Datasource</h2>
+        <p><pre><code>2014-06-24 17:20:23.014642,0,34,102,0,0,0,60
+2014-06-24 17:25:01.176772,0,32,174,0,0,0,133
+2014-06-24 17:30:01.370235,0,28,57,0,0,0,75
+2014-07-21 14:35:01.797838,0,39,74,0,0,0,30,0,262,2,3,3,0
+2014-07-21 14:40:02.000434,0,54,143,0,0,0,44,0,499,3,9,9,0</code></pre></p>
+      </section>
+      <section>
+        <h2>Reading from a CSV</h2>
+        <p><pre><code>df = pd.read_csv('results.csv', header=0, quotechar='\'')</code></pre></p>
+      </section>
+      <section>
+        <p><pre><code>                        datetime  abuse_passthrough  any_abuse_handled  ...
+0     2014-06-24 17:20:23.014642                  0                 34  ...</code></pre></p>
+      </section>
+      <section>
+        <h2>Setting the DateTime as the Index</h2>
+        <p><pre><code>>>> df['datetime'] = pandas.to_datetime(df.datetime)
+>>> df.index = df.datetime
+>>> del df['datetime']
 
-		</script>
+                            abuse_passthrough  any_abuse_handled ...
+datetime                                                         ...
+2014-06-24 17:20:23.014642                  0                 34 ...
+2014-06-24 17:25:01.176772                  0                 32 ...</code></pre></p>
+      </section>
+      <section>
+        <h2>Time Slicing</h2>
+        <p><pre><code>>>> df['2014-07-21 13:55:00':'2014-07-21 14:10:00']
+                            abuse_passthrough  any_abuse_handled ...
+datetime                                                         ...
+2014-07-21 13:55:01.153706                  0                 24 ...
+2014-07-21 14:00:01.372624                  0                 24 ...
+2014-07-21 14:05:01.910827                  0                 32 ...</code></pre></p>
+      </section>
+      <section
+        <h2>Handling Missing Data Points</h2>
+        <p><pre><code>>>> df.fillna(0, inplace=True)</code></pre></p>
+      </section>
+      <section>
+        <h2>Functions</h2>
+        <p><pre><code>>>> df.sum()
 
-	</body>
+abuse_passthrough                         39
+any_abuse_handled                      81537
+handle_bp_message_handled             271689
+handle_bp_message_corrupt_handled          0
+error                                      0
+forward_all_unhandled                      0
+original_message_handled              136116
+list_unsubscribe_optout                   71
+default_handler_dropped              1342285
+default_unhandled                       2978
+default_opt_out_bounce                 22044
+default_opt_out                        23132
+default_handler_pattern_dropped            0
+dtype: float64</code></pre></p>
+      </section>
+      <section>
+        <p><pre><code>>>> df.sum().sum()
+
+1879891.0</code></pre></p>
+      </section>
+      <section>
+        <p><pre><code>>>> df.mean()
+
+abuse_passthrough                      0.009673
+any_abuse_handled                     20.222470
+handle_bp_message_handled             67.383185
+handle_bp_message_corrupt_handled      0.000000
+error                                  0.000000
+forward_all_unhandled                  0.000000
+original_message_handled              33.758929
+list_unsubscribe_optout                0.017609
+default_handler_dropped              332.907986
+default_unhandled                      0.738591
+default_opt_out_bounce                 5.467262
+default_opt_out                        5.737103
+default_handler_pattern_dropped        0.000000
+dtype: float64</code></pre></p>
+      </section>
+      <section>
+        <p><pre><code>>>> df['2014-07-21 13:55:00':'2014-07-21 14:10:00'].apply(np.cumsum)
+
+                            abuse_passthrough  any_abuse_handled ...
+datetime                                                         ...
+2014-07-21 13:55:01.153706                  0                 24 ...
+2014-07-21 14:00:01.372624                  0                 48 ...
+2014-07-21 14:05:01.910827                  0                 80 ...</code></pre></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Resampling</h2>
+        <p><pre><code>>>> d_df = df.resample('1D', how='sum')
+
+                abuse_passthrough  any_abuse_handled ...
+    datetime                                         ...
+    2014-07-07                  0               3178 ...
+    2014-07-08                  1               6536 ...
+    2014-07-09                  2               6857 ...</code></pre></p>
+      </section>
+      <section>
+        <h2>Sorting</h2>
+        <p><pre><code>>>> d_df.sort('any_abuse_handled', ascending=False)
+
+                abuse_passthrough  any_abuse_handled ...
+    datetime                                         ...
+    2014-07-15                 21               7664 ...
+    2014-07-17                  5               7548 ...
+    2014-07-10                  0               7106 ...
+    2014-07-11                 10               6942 ...</code></pre></p>
+      </section>
+      <section>
+        <h2>Describe</h2>
+        <p><pre><code>>>> d_df.describe()
+
+           abuse_passthrough  any_abuse_handled ...
+    count           15.00000          15.000000 ...
+    mean             2.60000        5435.800000 ...
+    std              5.79162        1848.716358 ...
+    min              0.00000        2174.000000 ...
+    25%              0.00000        3810.000000 ...
+    50%              0.00000        6191.000000 ...
+    75%              1.50000        6899.500000 ...
+    max             21.00000        7664.000000 ...</code></pre></p>
+      </section>
+      <section>
+        <h2>Output to CSV</h2>
+        <p><pre><code>>>> d_df.to_csv(path_or_buf='output.csv')</code></pre></p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h2>One more thing...</h2>
+        <p>Vincent
+        <pre><code>import vincent</code></pre></p>
+      </section>
+      <section>
+        <h2>Charts</h2>
+        <p><pre><code>chart = vincent.StackedArea(d_df)
+        chart.legend(title='Legend')
+        chart.colors(brew='Set3')</code></pre></p>
+      </section>
+      <section>
+        <h2>Example</h2>
+        <p></p>
+      </section>
+    </section>
+
+    <section>
+      <h1>Questions</h1>
+      <h3>Jason A Myers / @jasonamyers</h3>
+    </section>
+
+  </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+controls: true,
+progress: true,
+history: true,
+center: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+// Parallax scrolling
+parallaxBackgroundImage: 'bg.jpg',
+parallaxBackgroundSize: '4272px 2336px',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+
+</script>
+
+</body>
 </html>
